@@ -19,18 +19,14 @@ export function deployCommands() {
   const commands = [];
 
   /** commands/ のパス */
-  const foldersPath = path.join(__dirname, "commands");
-  /** commands以下のフォルダーの名前の配列 */
-  const commandFolders = fs.readdirSync(foldersPath);
+  const commandsPath = path.join(__dirname, "commands");
 
-  /** フォルダーのパスを取得する */
-  const commandsPath = path.join(foldersPath, folder);
   /** ファイルを読み取る */
   const commandFiles = fs
     .readdirSync(commandsPath)
     .filter((file) => file.endsWith(".js") || file.endsWith(".ts"));
 
-    // ファイルそれぞれに対して次の操作をする
+  // ファイルそれぞれに対して次の操作をする
   for (const file of commandFiles) {
     /** 指定したファイルのパスを取得する */
     const cmdFilePath = path.join(commandsPath, file);
