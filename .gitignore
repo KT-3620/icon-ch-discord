@@ -4,5 +4,6 @@ dist
 .env
 .DS_Store
 .env.local
+image/
 
 log/
