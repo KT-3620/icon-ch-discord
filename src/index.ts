@@ -24,7 +24,7 @@ export const client = new Client({
 });
 
 // ../image フォルダがなければ作成
-const imageFolderPath = path.join(__dirname, "image");
+const imageFolderPath = path.join(__dirname, "../image");
 if (!fs.existsSync(imageFolderPath)) {
   fs.mkdirSync(imageFolderPath);
   logger.warn("imageフォルダを作成しました。画像を追加してください。");
