@@ -6,7 +6,8 @@ import {
 
 export const data = new SlashCommandBuilder()
   .setName("ping")
-  .setDescription("Pingを応答します");
+  .setDescription("Pingを応答します")
+  .setDMPermission(false);
 export async function execute(interaction: ChatInputCommandInteraction) {
   const embed = new EmbedBuilder().setTitle("Ping中...");
   const sent = await interaction.reply({
