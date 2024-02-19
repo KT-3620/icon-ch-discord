@@ -20,14 +20,24 @@ logger.debug("デバッグログも出力されます");
 
 /** Discord Botの唯一のClient */
 export const client = new Client({
-  intents: [
-    GatewayIntentBits.Guilds,
-    GatewayIntentBits.GuildMessages,
-    GatewayIntentBits.GuildMessageReactions,
-    GatewayIntentBits.DirectMessages,
-    GatewayIntentBits.GuildPresences,
-  ],
+  intents: [GatewayIntentBits.Guilds],
 });
+
+// ../image フォルダがなければ作成
+const imageFolderPath = path.join(__dirname, "image");
+if (!fs.existsSync(imageFolderPath)) {
+  fs.mkdirSync(imageFolderPath);
+  logger.warn("imageフォルダを作成しました。画像を追加してください。");
+} else {
+  if (
+    fs.readdirSync(imageFolderPath).filter((file) => file.endsWith(".png"))
+      .length === 0
+  ) {
+    logger.warn(
+      "imageフォルダにpng形式の画像が含まれていません。画像を追加してください。"
+    );
+  }
+}
 
 /**
  *
@@ -44,20 +54,22 @@ interface Command {
 
 export const cmdCollection: Collection<string, Command> = new Collection();
 
-const foldersPath = path.join(__dirname, "commands");
+const commandsPath = path.join(__dirname, "commands");
 const commandFiles = fs
   .readdirSync(commandsPath)
   .filter((file) => file.endsWith(".js") || file.endsWith(".ts"));
 for (const file of commandFiles) {
   const filePath = path.join(commandsPath, file);
-  const command = import(filePath);
-  if ("data" in command && "execute" in command) {
-    cmdCollection.set(command.data.name as string, command);
-  } else {
-    logger.warn(
-      `${filePath} ファイルのコマンドは、dataプロパティまたはexecuteプロパティを持っていません。`
-    );
-  }
+  (async () => {
+    const command = await import(filePath);
+    if ("data" in command && "execute" in command) {
+      cmdCollection.set(command.data.name as string, command);
+    } else {
+      logger.warn(
+        `${filePath} ファイルのコマンドは、dataプロパティまたはexecuteプロパティを持っていません。`
+      );
+    }
+  })();
 }
 
 const eventsPath = path.join(__dirname, "events");
