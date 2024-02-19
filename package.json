@@ -15,19 +15,18 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@types/node": "^20.10.6",
-    "@types/node-schedule": "^2.1.5",
+    "@types/node": "^20.11.19",
+    "@types/node-schedule": "^2.1.6",
     "discord.js": "^14.14.1",
-    "dotenv": "^16.3.1",
+    "dotenv": "^16.4.4",
     "log4js": "^6.9.1",
     "node-schedule": "^2.1.1",
-    "redis": "^4.6.12",
     "typescript": "^5.3.3"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^6.18.0",
-    "@typescript-eslint/parser": "^6.18.0",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
     "eslint": "^8.56.0",
-    "prisma": "^5.7.1"
+    "prisma": "^5.9.1"
   }
 }
