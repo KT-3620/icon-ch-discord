@@ -6,13 +6,3 @@ dist
 .env.local
 
 log/
-
-dump.rdb
-/src/commands/**
-!/src/commands/*
-
-/src/commands/**
-!/src/commands/ping.ts
-
-!/src/commands/focus.ts
-
