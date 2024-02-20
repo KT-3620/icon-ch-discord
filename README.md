@@ -59,3 +59,7 @@ pnpm start
 - サーバーを管理
 
 権限だけ与えれば動きます。
+
+## コード参考
+
+- [Discord.js の公式ガイド](https://github.com/discordjs/guide)
