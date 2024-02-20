@@ -9,7 +9,18 @@ import { getRandomImage } from "./function/getRandomImage";
  */
 
 export function setSchedule(guild: Guild) {
-  schedule.scheduleJob("0 0 * * *", async () => {
+  const cron = (() => {
+    if (process.env.ICON_CRON) {
+      return process.env.ICON_CRON;
+    } else {
+      logger.info(
+        "ICON_CRONが設定されていません。デフォルトの設定を使用します。"
+      );
+      return "0 0 * * *";
+    }
+  })();
+
+  schedule.scheduleJob(cron, async () => {
     try {
       const imagePath = getRandomImage();
       await guild.setIcon(imagePath, "Icon Botによる定時変更");
