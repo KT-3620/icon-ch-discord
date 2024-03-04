@@ -25,15 +25,16 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 
   editing = true;
 
-  const embed = new EmbedBuilder()
-    .setTitle("Testing...")
-    .setDescription("変更を試しています...");
-  await interaction.reply({
-    embeds: [embed],
-    ephemeral: true,
-  });
-
   try {
+    const embed = new EmbedBuilder()
+      .setTitle("Testing...")
+      .setDescription("変更を試しています...");
+
+    await interaction.reply({
+      embeds: [embed],
+      ephemeral: true,
+    });
+
     embed.setTitle("OK!").setColor("Green").setDescription("変更できました！");
 
     const randomImage = getRandomImage();
